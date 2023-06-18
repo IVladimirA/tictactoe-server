@@ -10,5 +10,7 @@ jobs:
       image: ruby:3.0.0
     steps:
       - uses: actions/checkout@v3
+      - name: install gems
+        run: bundle install
       - name: rubocop
         run: bundle exec rubocop --parallel
