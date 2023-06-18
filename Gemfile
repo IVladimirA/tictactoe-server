@@ -36,6 +36,7 @@ gem 'dotenv-rails'
 
 group :development, :test do
   # Code testing
+  gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 4.1.0'
   # Code quality
   gem 'rubocop', require: false

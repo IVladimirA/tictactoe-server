@@ -6,14 +6,11 @@ jobs:
   lint:
     name: rubocop
     runs-on: ubuntu-20.04
-    strategy:
-      fail-fast: false
+    container:
+      image: ruby:3.0.0
     steps:
       - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - name: gem update
-        run: gem update --system
+      - name: install gems
+        run: bundle install
       - name: rubocop
         run: bundle exec rubocop --parallel

@@ -11,9 +11,11 @@ default: &default
 
 development:
   <<: *default
+  database: tictactoe_development
 
 test:
   <<: *default
+  database: tictactoe_test
 
 production:
   <<: *default

@@ -1,0 +1,35 @@
+name: Rspec testing
+
+on: pull_request
+
+jobs:
+  rspec:
+    runs-on: ubuntu-20.04
+    container:
+      image: ruby:3.0.0
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: install gems
+        run: bundle install
+      - name: rspec
+        env:
+          DATABASE_USER: postgres
+          DATABASE_PASSWORD: postgres
+          DATABASE_HOST: postgres
+          RAILS_ENV: test
+        run: |
+          rails db:create
+          bundle exec rspec
