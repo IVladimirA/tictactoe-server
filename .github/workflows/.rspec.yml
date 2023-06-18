@@ -27,7 +27,7 @@ jobs:
         run: bundle install
       - name: rspec
         env:
-          DATABASE_USERNAME: postgres
+          DATABASE_USER: postgres
           DATABASE_PASSWORD: postgres
           DATABASE_PORT: ${{ job.services.postgres.ports[5432] }}
           DATABASE_HOST: postgres
