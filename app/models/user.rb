@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  validates :username, presence: true
-  validates :email, presence: true
-  validates :passHash, presence: true
-  validates :guest, presence: true
+  validates :guest, inclusion: { in: [true, false] }
+  validates :username, presence: true, if: -> { guest == false }
+  validates :email, presence: true, if: -> { guest == false }
+  validates :passHash, presence: true, if: -> { guest == false }
 end
