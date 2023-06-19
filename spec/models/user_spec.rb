@@ -20,6 +20,6 @@ RSpec.describe User do
   end
 
   it 'has no passHash' do
-    expect(build(:user, passHash: nil)).to be_invalid
+    expect(build(:user, password_hash: nil)).to be_invalid
   end
 end
