@@ -4,14 +4,14 @@ FactoryBot.define do
   factory :user do
     username { 'JohnKiller' }
     email { 'test@gmail.com' }
-    passHash { 'hash' }
+    password_hash { BCrypt::Password.create('password') }
     guest { false }
   end
 
   factory :guest_user, parent: :user do
     username { '' }
     email { '' }
-    passHash { '' }
+    password_hash { '' }
     guest { true }
   end
 end

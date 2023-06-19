@@ -31,8 +31,12 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'bootsnap', require: false
 # Postgresql
 gem 'pg', '~> 1.5'
-# environment variables
+# Environment variables
 gem 'dotenv-rails'
+# Password hashing
+gem 'bcrypt', '3.1.13'
+# JWT encryption
+gem 'jwt', '2.7.0'
 
 group :development, :test do
   # Code testing
