@@ -7,11 +7,11 @@ module Jwt
     end
 
     def self.access_expire_after
-      15.minutes
+      5.minutes
     end
 
     def self.refresh_expire_after
-      7.days
+      90.days
     end
   end
 end

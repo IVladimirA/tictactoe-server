@@ -29,6 +29,8 @@ class UsersController < ApplicationController
   def refresh
     user = User.find_by(refresh: params[:refresh])
 
+    return render(json: {}, status: :forbidden) if user.blank?
+
     access, refresh = Jwt::IssuerService.call(user: user)
     render json: { access: access, refresh: refresh }
   end
