@@ -7,5 +7,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     @current_user = Jwt::AuthenticatorService.call(headers: request.headers)
+  rescue JWT::ExpiredSignature, StandardError
+    render(json: {}, status: :unauthorized)
   end
 end
