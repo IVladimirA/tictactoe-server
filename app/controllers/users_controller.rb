@@ -3,8 +3,6 @@
 class UsersController < ApplicationController
   before_action :authenticate, only: %i[logout]
 
-  def new; end
-
   def create
     user = Users::CreatorService.call(user_params: user_params)
     access, refresh = Jwt::IssuerService.call(user: user)
