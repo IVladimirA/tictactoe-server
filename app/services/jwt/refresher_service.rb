@@ -3,7 +3,7 @@
 module Jwt
   class RefresherService
     def self.call(user:)
-      new_access_token, new_refresh_token = Jwt::Issuer.call(user)
+      new_access_token, new_refresh_token = Jwt::IssuerService.call(user: user)
       user.update(refresh: new_refresh_token)
       [new_access_token, new_refresh_token]
     end
