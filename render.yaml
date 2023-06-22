@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: mysite
+    runtime: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_NAME
+      - key: DATABASE_USER
+      - key: DATABASE_PASSWORD
+      - key: DATABASE_HOST
+      - key: JWT_SECRET_KEY
+      - key: RAILS_MASTER_KEY
+        sync: false
