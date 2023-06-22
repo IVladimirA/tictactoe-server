@@ -3,10 +3,15 @@
 module Users
   class CreatorService
     def self.call(user_params:)
-      user = User.new(user_params)
-      user.password = user_params[:password]
+      if user_params.dig(:guest) == true
+        user = User.new(username: 'Guest', guest: true, email: '')
+        user.password = ''
+      else
+        user = User.new(user_params)
+        user.password = user_params[:password]
+      end
       user.save!
-
+      
       user
     end
   end
