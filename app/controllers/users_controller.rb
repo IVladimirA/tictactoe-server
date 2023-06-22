@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :authenticate, only: %i[logout]
+  before_action :authenticate, only: %i[me logout]
 
   def create
     user = Users::CreatorService.call(user_params: user_params)
     access, refresh = Jwt::IssuerService.call(user: user)
-    render json: { access: access, refresh: refresh }
+    render json: { access: access, refresh: refresh, username: user.username }
+  end
+
+  def me
   end
 
   def logout
@@ -18,10 +21,10 @@ class UsersController < ApplicationController
   def login
     user = User.find_by(email: params.dig(:user, :email))
 
-    return render json: { error: 'wrong password' } if user.password != params.dig(:user, :password)
+    return render(json: { error: 'wrong password' }, status: :unauthorized) if user.password != params.dig(:user, :password)
 
     access, refresh = Jwt::IssuerService.call(user: user)
-    render json: { access: access, refresh: refresh }
+    render json: { access: access, refresh: refresh, username: user.username }
   end
 
   def refresh
